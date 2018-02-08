@@ -1,4 +1,5 @@
 #!/bin/bash
+# Execute as . ./setpass.sh to set the password as environment variable
 
 passfile=./pass.sec
 
