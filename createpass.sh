@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Create an encrypted file with the password
 
 if [ $# -ne 1 ]; then
 	echo "createpass.sh password"
