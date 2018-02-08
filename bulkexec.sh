@@ -1,4 +1,7 @@
 #!/usr/bin/bash
+# bulkexec.sh
+# Execute an sql script on a list of databases
+# bulkexec.sh databaselistfile script logfile
 
 passfile=./pass.sec
 
