@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+# Connect to a database, if more than one match a menu is shown to select connection
+# connect.sh database
 
 passfile=./pass.sec
 
