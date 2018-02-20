@@ -141,7 +141,7 @@ alias quickwaits=select
 				END AS sw_event
 				FROM
 				v$session
-				where type = 'USER'
+				where type != 'BACKGROUND'
 				GROUP BY
 				CASE WHEN state != 'WAITING' THEN 'WORKING'
 						ELSE 'WAITING'
@@ -154,7 +154,13 @@ alias quickwaits=select
 
 alias quicksqls=select sql_hash_value, count(*) from v$session where status = 'ACTIVE' group by sql_hash_value order by 2 desc;
 
-
+alias listawrsnap=
+select snap_id,
+  snap_level,
+  to_char(begin_interval_time, 'dd/mm/yy hh24:mi:ss') begin
+from 
+   dba_hist_snapshot where begin_interval_time > sysdate - :1
+order by  1;
 				
 
 script kill.js
