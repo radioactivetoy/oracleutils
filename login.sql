@@ -162,5 +162,6 @@ from
    dba_hist_snapshot where begin_interval_time > sysdate - :1
 order by  1;
 				
+alias account= select * from dba_users where username like ('%'||:1||'%')
 
 script kill.js
