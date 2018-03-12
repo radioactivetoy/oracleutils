@@ -40,6 +40,13 @@ fi
 
 connections=$(findtns $1)
 
+
+if [ -z $(echo -e "$connections" )  ];
+then
+	echo "No Databases found containing $1."
+	exit 1
+fi
+
 if [ $(echo -e "$connections" | wc -l) -gt 1 ]
 then
 	echo "Select database:"	
