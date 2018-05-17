@@ -2,7 +2,7 @@
 # Connect to a database, if more than one match a menu is shown to select connection
 # connect.sh database
 
-passfile=./pass.sec
+export passfile=./pass.sec
 
 trap ctrl_c INT
 
@@ -32,6 +32,8 @@ connect()
 	chtitle "Cygwin"
 }
 
+getpass()
+{
 if [ -v $PASS ]; then
         PASS=$(openssl enc -aes-256-cbc -d -in $passfile)
 	if [ $? -ne 0 ]; then
@@ -39,7 +41,7 @@ if [ -v $PASS ]; then
 		exit 1
 	fi
 fi
-
+}
 
 connections=$(findtns $1)
 
@@ -56,10 +58,12 @@ then
 	IFS=$'\n'	
 	select conn in $connections
 	do	
+		getpass		
 		connect $conn
 		exit 0
 	done		
 else
+        getpass	
 	connect $connections 		
 	exit 0
 fi	                                  
