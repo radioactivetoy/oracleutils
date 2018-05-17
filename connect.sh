@@ -59,11 +59,13 @@ then
 	select conn in $connections
 	do	
 		getpass		
+	        chtitle $conn
 		connect $conn
 		exit 0
 	done		
 else
-        getpass	
+        getpass
+	chtitle $connections	
 	connect $connections 		
 	exit 0
 fi	                                  
