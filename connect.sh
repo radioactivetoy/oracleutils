@@ -7,7 +7,7 @@ passfile=./pass.sec
 trap ctrl_c INT
 
 function ctrl_c() {
-       chtitle "Cygwin"
+       	chtitle "Cygwin"
 	exit 1 
 }                                                                             
 
@@ -28,20 +28,23 @@ chtitle()
 connect()
 {
  	echo "Connecting to $1"
-	chtitle $1	 
 	$sqlclexec "$USER/$PASS@$1"
 	chtitle "Cygwin"
 }
 
 if [ -v $PASS ]; then
         PASS=$(openssl enc -aes-256-cbc -d -in $passfile)
+	if [ $? -ne 0 ]; then
+		echo "Unable to decrypt password"
+		exit 1
+	fi
 fi
 
 
 connections=$(findtns $1)
 
 
-if [ -z $(echo -e "$connections" )  ];
+if [ -z $(echo "$connections" | head -1)  ];
 then
 	echo "No Databases found containing $1."
 	exit 1
