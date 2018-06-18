@@ -58,14 +58,12 @@ then
 	IFS=$'\n'	
 	select conn in $connections
 	do	
-		getpass		
-	        chtitle $conn
-		connect $conn
-		exit 0
+		break	
 	done		
 else
-        getpass
-	chtitle $connections	
-	connect $connections 		
-	exit 0
-fi	                                  
+	conn=$connections 		
+fi
+
+getpass
+chtitle $conn
+connect $conn	                                  
